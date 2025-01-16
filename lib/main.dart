@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/dashboard.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:my_app/services/firebase_api.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Initialize Firebase
+  await FirebaseApi().initNotifications();
   runApp(ManufacturingDashboardApp());
 }
 
@@ -13,6 +20,7 @@ class ManufacturingDashboardApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      // home: LoginPage(title: "Login"),
       home: DashboardScreen(),
     );
   }
